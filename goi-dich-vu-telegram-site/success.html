@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanh toán thành công</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="success">
+  <canvas id="confettiCanvas"></canvas>
+  <div class="page-shell success-shell">
+    <div class="bg-grid"></div>
+    <div class="glow glow-b"></div>
+    <div class="glow glow-c"></div>
+
+    <main class="wrap success-layout">
+      <section class="card blur-card success-card">
+        <div class="success-icon">✓</div>
+        <span class="badge badge-success">Thanh toán thành công</span>
+        <h1>Hệ thống đã ghi nhận đơn hàng</h1>
+        <p class="lead">Webhook đã cập nhật trạng thái và gửi Gmail về Telegram admin để tiếp tục xử lý.</p>
+
+        <div class="success-summary">
+          <div>
+            <span>Gmail</span>
+            <strong id="doneEmail">Đang tải...</strong>
+          </div>
+          <div>
+            <span>Mã đơn</span>
+            <strong id="doneOrderId">Đang tải...</strong>
+          </div>
+          <div>
+            <span>Gói</span>
+            <strong data-config="plan_name">29.000đ / 1 tháng</strong>
+          </div>
+        </div>
+
+        <div class="support-actions">
+          <a class="ghost-btn" href="index.html">Tạo đơn mới</a>
+          <a class="primary-btn support-link" href="https://t.me/your_support" target="_blank" rel="noreferrer">Nhắn admin</a>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>

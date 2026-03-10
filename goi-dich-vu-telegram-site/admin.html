@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Premium Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body data-page="admin">
+  <div class="page-shell admin-shell">
+    <div class="bg-grid"></div>
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+
+    <header class="site-header wrap compact admin-topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">AD</span>
+        <span>
+          <strong>Admin Dashboard</strong>
+          <small>Lịch sử đơn, chống spam, cấu hình QR</small>
+        </span>
+      </a>
+      <div class="header-actions">
+        <a class="ghost-btn" href="index.html">Xem trang khách</a>
+        <button class="ghost-btn" id="logoutBtn" hidden>Đăng xuất</button>
+      </div>
+    </header>
+
+    <main class="wrap admin-layout">
+      <section id="adminLoginCard" class="card blur-card admin-login-card">
+        <span class="badge">Bảo vệ phiên quản trị</span>
+        <h1>Đăng nhập admin</h1>
+        <p class="lead">Mật khẩu mặc định trong bộ code là <code>admin123456</code>. Sau khi vào dashboard, hãy đổi lại ngay trong phần cấu hình.</p>
+        <form id="adminLoginForm" class="admin-login-form" novalidate>
+          <label for="adminPassword">Mật khẩu admin</label>
+          <input id="adminPassword" type="password" placeholder="Nhập mật khẩu admin" autocomplete="current-password" required />
+          <button type="submit" class="primary-btn full">Đăng nhập</button>
+          <p id="adminLoginError" class="inline-error" hidden></p>
+        </form>
+      </section>
+
+      <section id="adminDashboard" class="admin-dashboard" hidden>
+        <div class="admin-grid">
+          <aside class="admin-sidebar card">
+            <div>
+              <p class="eyebrow">Điều hướng</p>
+              <h2>Quản trị hệ thống</h2>
+            </div>
+            <nav class="admin-nav">
+              <button class="admin-nav-link active" data-tab="overview">Tổng quan</button>
+              <button class="admin-nav-link" data-tab="orders">Lịch sử đơn</button>
+              <button class="admin-nav-link" data-tab="settings">Cấu hình & QR</button>
+            </nav>
+            <div class="sidebar-note">
+              <strong>Mẹo:</strong>
+              <p>Khi webhook báo paid, bạn có thể đổi sang <em>processing</em> hoặc <em>completed</em> để dễ theo dõi tiến độ xử lý.</p>
+            </div>
+          </aside>
+
+          <div class="admin-content">
+            <section class="admin-tab active" id="tab-overview">
+              <div class="admin-cards" id="statsGrid"></div>
+              <div class="admin-panels two-col">
+                <article class="card panel-card">
+                  <div class="panel-head">
+                    <h3>Đơn mới gần đây</h3>
+                    <button class="ghost-btn small-btn" id="refreshOverviewBtn">Làm mới</button>
+                  </div>
+                  <div class="table-wrap">
+                    <table class="admin-table">
+                      <thead>
+                        <tr>
+                          <th>Mã đơn</th>
+                          <th>Gmail</th>
+                          <th>Trạng thái</th>
+                          <th>Số tiền</th>
+                        </tr>
+                      </thead>
+                      <tbody id="recentOrdersBody"></tbody>
+                    </table>
+                  </div>
+                </article>
+
+                <article class="card panel-card quick-tools">
+                  <div class="panel-head">
+                    <h3>Công cụ nhanh</h3>
+                  </div>
+                  <div class="quick-tool-grid">
+                    <button class="ghost-btn" id="testTelegramBtn">Test Telegram</button>
+                    <a class="ghost-btn" href="payment.html" target="_blank" rel="noreferrer">Mở payment</a>
+                    <a class="ghost-btn" href="index.html" target="_blank" rel="noreferrer">Mở landing</a>
+                  </div>
+                  <p class="form-note">Test Telegram sẽ gửi một tin nhắn mẫu để xác nhận bot và chat id đã cấu hình đúng.</p>
+                </article>
+              </div>
+            </section>
+
+            <section class="admin-tab" id="tab-orders">
+              <article class="card panel-card">
+                <div class="panel-head stack-mobile">
+                  <div>
+                    <h3>Lịch sử đơn hàng</h3>
+                    <p class="subtle">Tìm theo Gmail, mã đơn, ghi chú hoặc mã giao dịch.</p>
+                  </div>
+                  <button class="ghost-btn small-btn" id="refreshOrdersBtn">Làm mới</button>
+                </div>
+                <form id="orderFilterForm" class="toolbar">
+                  <input type="search" id="orderSearch" placeholder="Tìm kiếm Gmail / mã đơn / mã GD" />
+                  <select id="orderStatusFilter">
+                    <option value="all">Tất cả trạng thái</option>
+                    <option value="pending">Pending</option>
+                    <option value="paid">Paid</option>
+                    <option value="processing">Processing</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                  <button type="submit" class="primary-btn">Lọc</button>
+                </form>
+
+                <div class="table-wrap">
+                  <table class="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Mã đơn</th>
+                        <th>Gmail</th>
+                        <th>Thời gian</th>
+                        <th>Trạng thái</th>
+                        <th>Số tiền</th>
+                        <th>Hành động</th>
+                      </tr>
+                    </thead>
+                    <tbody id="ordersTableBody"></tbody>
+                  </table>
+                </div>
+
+                <div class="pagination-bar">
+                  <button class="ghost-btn small-btn" id="prevPageBtn">Trang trước</button>
+                  <span id="paginationLabel">Trang 1 / 1</span>
+                  <button class="ghost-btn small-btn" id="nextPageBtn">Trang sau</button>
+                </div>
+              </article>
+
+              <article class="card panel-card order-editor">
+                <div class="panel-head">
+                  <h3>Cập nhật đơn được chọn</h3>
+                </div>
+                <form id="orderActionForm" class="settings-form" novalidate>
+                  <label for="selectedOrderId">Mã đơn</label>
+                  <input id="selectedOrderId" type="text" placeholder="Chọn đơn từ bảng phía trên" readonly />
+
+                  <label for="selectedOrderStatus">Trạng thái</label>
+                  <select id="selectedOrderStatus">
+                    <option value="pending">Pending</option>
+                    <option value="paid">Paid</option>
+                    <option value="processing">Processing</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+
+                  <label for="selectedOrderNote">Ghi chú admin</label>
+                  <textarea id="selectedOrderNote" rows="4" placeholder="Ví dụ: đã nhận xử lý, đợi hoàn tất"></textarea>
+
+                  <div class="settings-actions">
+                    <button type="submit" class="primary-btn">Lưu trạng thái</button>
+                    <button type="button" class="ghost-btn" id="resendTelegramBtn">Gửi lại Telegram</button>
+                  </div>
+                  <p id="orderActionMessage" class="form-note"></p>
+                </form>
+              </article>
+            </section>
+
+            <section class="admin-tab" id="tab-settings">
+              <article class="card panel-card">
+                <div class="panel-head">
+                  <h3>Cấu hình giao diện, thanh toán và Telegram</h3>
+                </div>
+                <form id="settingsForm" class="settings-form" enctype="multipart/form-data" novalidate>
+                  <div class="settings-grid">
+                    <div>
+                      <label for="siteName">Tên site</label>
+                      <input id="siteName" name="site_name" type="text" />
+                    </div>
+                    <div>
+                      <label for="siteTagline">Tagline</label>
+                      <input id="siteTagline" name="site_tagline" type="text" />
+                    </div>
+                    <div>
+                      <label for="price">Giá tiền</label>
+                      <input id="price" name="price" type="number" min="0" />
+                    </div>
+                    <div>
+                      <label for="planName">Tên gói</label>
+                      <input id="planName" name="plan_name" type="text" />
+                    </div>
+                    <div>
+                      <label for="bankName">Ngân hàng</label>
+                      <input id="bankName" name="bank_name" type="text" />
+                    </div>
+                    <div>
+                      <label for="bankAccountName">Chủ tài khoản</label>
+                      <input id="bankAccountName" name="bank_account_name" type="text" />
+                    </div>
+                    <div>
+                      <label for="bankAccountNumber">Số tài khoản</label>
+                      <input id="bankAccountNumber" name="bank_account_number" type="text" />
+                    </div>
+                    <div>
+                      <label for="supportLabel">Tên nút hỗ trợ</label>
+                      <input id="supportLabel" name="support_label" type="text" />
+                    </div>
+                    <div>
+                      <label for="supportLink">Link hỗ trợ</label>
+                      <input id="supportLink" name="support_link" type="url" />
+                    </div>
+                    <div>
+                      <label for="heroBadge">Badge nổi bật</label>
+                      <input id="heroBadge" name="hero_badge" type="text" />
+                    </div>
+                    <div class="full-span">
+                      <label for="ctaSubtitle">Mô tả CTA</label>
+                      <input id="ctaSubtitle" name="cta_subtitle" type="text" />
+                    </div>
+                    <div>
+                      <label for="telegramToken">Telegram bot token</label>
+                      <input id="telegramToken" name="telegram_bot_token" type="text" />
+                    </div>
+                    <div>
+                      <label for="telegramChatId">Telegram chat id</label>
+                      <input id="telegramChatId" name="telegram_chat_id" type="text" />
+                    </div>
+                    <div>
+                      <label for="webhookSecret">Webhook secret</label>
+                      <input id="webhookSecret" name="webhook_secret" type="text" />
+                    </div>
+                    <div>
+                      <label for="newAdminPassword">Mật khẩu admin mới</label>
+                      <input id="newAdminPassword" name="new_admin_password" type="password" placeholder="Để trống nếu không đổi" />
+                    </div>
+                    <div class="full-span">
+                      <label for="qrImage">Upload QR mới</label>
+                      <input id="qrImage" name="qr_image" type="file" accept="image/png,image/jpeg,image/webp" />
+                    </div>
+                  </div>
+
+                  <div class="settings-preview">
+                    <div>
+                      <span>QR hiện tại</span>
+                      <img id="settingsQrPreview" src="img/mbbank-qr.png" alt="QR hiện tại" />
+                    </div>
+                  </div>
+
+                  <div class="settings-actions">
+                    <button type="submit" class="primary-btn">Lưu cấu hình</button>
+                  </div>
+                  <p id="settingsMessage" class="form-note"></p>
+                </form>
+              </article>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast"></div>
+  </div>
+  <script src="js/admin.js"></script>
+</body>
+</html>

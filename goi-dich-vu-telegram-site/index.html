@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premium Service | Đặt dịch vụ qua Gmail</title>
+  <meta name="description" content="Website dịch vụ số với quy trình nhập Gmail, thanh toán QR, webhook xác nhận và gửi Telegram cho admin." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="landing">
+  <div class="page-shell">
+    <div class="bg-grid"></div>
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="sparkles" id="sparkles"></div>
+
+    <header class="site-header wrap">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">PS</span>
+        <span>
+          <strong data-config="site_name">Premium Service</strong>
+          <small data-config="site_tagline">Dịch vụ số xử lý qua Gmail, webhook và Telegram admin</small>
+        </span>
+      </a>
+      <nav class="header-actions">
+        <a class="ghost-btn" href="#features">Tính năng</a>
+        <a class="ghost-btn support-link" href="https://t.me/your_support" target="_blank" rel="noreferrer">Hỗ trợ</a>
+        <a class="primary-btn" href="admin.html">Admin</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero wrap">
+        <div class="hero-copy card blur-card">
+          <div class="hero-badges">
+            <span class="badge">Dịch vụ số</span>
+            <span class="badge badge-success" data-config="hero_badge">Webhook xác nhận tự động</span>
+          </div>
+          <h1>Nhập Gmail, thanh toán QR, admin nhận Telegram để xử lý.</h1>
+          <p class="lead" data-config="cta_subtitle">Nhập Gmail, thanh toán QR, admin nhận Telegram để xử lý.</p>
+
+          <div class="hero-pills">
+            <span>⚡ Tạo đơn trong vài giây</span>
+            <span>🔒 Không thu mật khẩu</span>
+            <span>📩 Báo Telegram ngay khi thanh toán</span>
+            <span>🛡️ Có chống spam cơ bản</span>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="metric-card">
+              <strong>1</strong>
+              <span>Gmail hợp lệ</span>
+            </article>
+            <article class="metric-card">
+              <strong data-price-text>29.000đ</strong>
+              <span>Thanh toán / tháng</span>
+            </article>
+            <article class="metric-card">
+              <strong>Auto</strong>
+              <span>Webhook + Telegram</span>
+            </article>
+          </div>
+        </div>
+
+        <aside class="order-card card gradient-border" id="orderSection">
+          <div class="sticker-ring">
+            <img class="sticker floating" src="img/sticker-support.png" alt="Sticker hỗ trợ" />
+            <span class="pulse-dot"></span>
+          </div>
+          <p class="eyebrow">Đặt dịch vụ ngay</p>
+          <h2 data-price-text>29.000đ</h2>
+          <p class="sub-price" data-config="plan_name">29.000đ / 1 tháng</p>
+
+          <form id="orderForm" class="order-form" novalidate>
+            <label for="email">Gmail nhận xử lý</label>
+            <input id="email" name="email" type="email" placeholder="example@gmail.com" autocomplete="email" required />
+
+            <label for="note">Ghi chú thêm</label>
+            <textarea id="note" name="note" rows="3" placeholder="Ví dụ: cần xử lý trong hôm nay"></textarea>
+
+            <input id="websiteTrap" name="website" type="text" autocomplete="off" tabindex="-1" class="trap-field" aria-hidden="true" />
+
+            <button type="submit" class="primary-btn full">Tiếp tục thanh toán</button>
+            <p class="form-note">Chỉ cần Gmail chính xác. Sau khi thanh toán, hệ thống sẽ gửi thông tin về Telegram admin để xử lý thủ công.</p>
+            <p class="inline-error" id="formError" hidden></p>
+          </form>
+        </aside>
+      </section>
+
+      <section class="overview wrap" id="features">
+        <div class="section-head">
+          <span class="badge">Professional flow</span>
+          <h3>Website được chia thành nhiều file, dễ sửa và dễ triển khai</h3>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card card">
+            <span class="icon-circle">01</span>
+            <h4>Trang nhập Gmail</h4>
+            <p>Khách nhập Gmail, ghi chú tùy chọn và hệ thống tạo đơn riêng với nội dung chuyển khoản tự động.</p>
+          </article>
+          <article class="feature-card card">
+            <span class="icon-circle">02</span>
+            <h4>Trang payment có QR</h4>
+            <p>Hiển thị QR MB Bank, số tiền, nội dung chuyển khoản, và trạng thái đơn theo thời gian thực.</p>
+          </article>
+          <article class="feature-card card">
+            <span class="icon-circle">03</span>
+            <h4>Webhook + Telegram</h4>
+            <p>Khi thanh toán thành công, webhook cập nhật trạng thái và gửi thông báo về Telegram cho admin.</p>
+          </article>
+          <article class="feature-card card">
+            <span class="icon-circle">04</span>
+            <h4>Admin dashboard</h4>
+            <p>Theo dõi lịch sử đơn, đổi trạng thái, cập nhật QR và cấu hình mà không cần sửa code tay.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="timeline wrap">
+        <div class="section-head">
+          <span class="badge badge-dark">Luồng xử lý</span>
+          <h3>Từ khách hàng đến admin</h3>
+        </div>
+        <div class="flow-list card">
+          <div class="flow-item">
+            <span>1</span>
+            <div>
+              <strong>Khách nhập Gmail</strong>
+              <p>Tạo mã đơn và nội dung chuyển khoản riêng cho mỗi giao dịch.</p>
+            </div>
+          </div>
+          <div class="flow-item">
+            <span>2</span>
+            <div>
+              <strong>Khách quét QR MB Bank</strong>
+              <p>Chuyển khoản đúng số tiền và đúng nội dung để hệ thống đối chiếu.</p>
+            </div>
+          </div>
+          <div class="flow-item">
+            <span>3</span>
+            <div>
+              <strong>Webhook nhận callback</strong>
+              <p>Đổi trạng thái đơn sang đã thanh toán và lưu giao dịch vào lịch sử đơn.</p>
+            </div>
+          </div>
+          <div class="flow-item">
+            <span>4</span>
+            <div>
+              <strong>Telegram gửi về admin</strong>
+              <p>Admin nhận Gmail và mã đơn để tiếp tục xử lý thủ công.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="support wrap">
+        <div class="support-card card blur-card">
+          <div>
+            <span class="badge badge-success">Hỗ trợ nhanh</span>
+            <h3>Có sẵn nút hỗ trợ nổi và giao diện premium</h3>
+            <p>Link hỗ trợ, giá, ngân hàng và QR đều lấy từ cấu hình, nên bạn có thể đổi ngay trong trang quản trị.</p>
+          </div>
+          <div class="support-actions">
+            <a class="ghost-btn support-link" href="https://t.me/your_support" target="_blank" rel="noreferrer">Nhắn hỗ trợ</a>
+            <a class="primary-btn" href="payment.html">Xem trang payment</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <a class="floating-support support-link" href="https://t.me/your_support" target="_blank" rel="noreferrer">💬 Hỗ trợ ngay</a>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>

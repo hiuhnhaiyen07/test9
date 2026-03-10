@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment | Premium Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="payment">
+  <div class="page-shell">
+    <div class="bg-grid"></div>
+    <div class="glow glow-a"></div>
+    <div class="glow glow-c"></div>
+    <div class="sparkles" id="sparkles"></div>
+
+    <header class="site-header wrap compact">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">PS</span>
+        <span>
+          <strong data-config="site_name">Premium Service</strong>
+          <small>Trang thanh toán</small>
+        </span>
+      </a>
+      <div class="header-actions">
+        <a class="ghost-btn" href="index.html">← Quay lại</a>
+        <a class="ghost-btn support-link" href="https://t.me/your_support" target="_blank" rel="noreferrer">Hỗ trợ</a>
+      </div>
+    </header>
+
+    <main class="wrap payment-grid">
+      <section class="card blur-card pay-main">
+        <span class="badge">Bước 2 / 2</span>
+        <h1>Thanh toán đơn hàng</h1>
+        <p class="lead">Chuyển khoản đúng số tiền và đúng nội dung để webhook đối chiếu tự động.</p>
+
+        <div class="summary-grid">
+          <div class="summary-box">
+            <span>Gmail</span>
+            <strong id="summaryEmail">Đang tải...</strong>
+          </div>
+          <div class="summary-box">
+            <span>Gói dịch vụ</span>
+            <strong data-config="plan_name">29.000đ / 1 tháng</strong>
+          </div>
+        </div>
+
+        <div class="bank-grid">
+          <article class="bank-card">
+            <span>Ngân hàng</span>
+            <strong data-config="bank_name">MB Bank</strong>
+          </article>
+          <article class="bank-card">
+            <span>Chủ tài khoản</span>
+            <strong data-config="bank_account_name">LE KIM YEN</strong>
+          </article>
+          <article class="bank-card">
+            <span>Số tài khoản</span>
+            <strong data-config="bank_account_number">610793</strong>
+          </article>
+          <article class="bank-card accent">
+            <span>Số tiền</span>
+            <strong data-price-text>29.000đ</strong>
+          </article>
+        </div>
+
+        <div class="transfer-card">
+          <div>
+            <span>Nội dung chuyển khoản</span>
+            <strong id="transferContent">Đang tạo mã đơn...</strong>
+          </div>
+          <button type="button" class="ghost-btn" id="copyTransfer">Sao chép</button>
+        </div>
+
+        <div class="status-card">
+          <div class="status-row done">
+            <i></i>
+            <div>
+              <strong>Đơn đã tạo</strong>
+              <p id="orderIdText">Chờ phản hồi từ máy chủ...</p>
+            </div>
+          </div>
+          <div class="status-row active" id="statusWaiting">
+            <i></i>
+            <div>
+              <strong>Chờ thanh toán</strong>
+              <p>Trang này sẽ tự kiểm tra trạng thái đơn theo chu kỳ.</p>
+            </div>
+          </div>
+          <div class="status-row" id="statusSuccess">
+            <i></i>
+            <div>
+              <strong>Đã xác nhận thanh toán</strong>
+              <p>Webhook thành công sẽ gửi thông báo về Telegram admin.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="helper-note">
+          File này dùng cùng <code>api/webhook.php</code>, <code>api/order_status.php</code> và ảnh QR có thể thay trực tiếp từ trang quản trị.
+        </div>
+      </section>
+
+      <aside class="card qr-panel gradient-border">
+        <div class="qr-head">
+          <img src="img/sticker-support.png" alt="Sticker" class="sticker small floating" />
+          <div>
+            <p class="eyebrow">QR thanh toán</p>
+            <h2>Quét bằng app ngân hàng</h2>
+          </div>
+        </div>
+
+        <div class="qr-card">
+          <img id="qrImage" src="img/mbbank-qr.png" alt="QR thanh toán" class="qr-image" />
+        </div>
+
+        <div class="qr-foot">
+          <p>Đổi QR ngay trong admin dashboard bằng cách tải ảnh mới lên. Hệ thống sẽ tự cập nhật lên trang payment.</p>
+          <a class="primary-btn full support-link" href="https://t.me/your_support" target="_blank" rel="noreferrer">Liên hệ hỗ trợ</a>
+        </div>
+      </aside>
+    </main>
+
+    <div class="toast" id="toast"></div>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>
